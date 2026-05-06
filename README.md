@@ -1,36 +1,29 @@
 # beacon-gfx-palette-mark
 
-`beacon-gfx-palette-mark` is a Dart project for Graphics. It turns design a Dart verification harness for palette systems, covering security rule linting, safe and unsafe fixtures, and failure-oriented tests into a small local model with readable fixtures and a direct verification command.
+`beacon-gfx-palette-mark` keeps a focused Dart implementation around graphics. The project goal is to design a Dart verification harness for palette systems, covering security rule linting, safe and unsafe fixtures, and failure-oriented tests.
 
-## Reading Beacon Gfx Palette Mark
+## Why It Exists
 
-Start with the README, then open `metadata/project.json` to check the constants behind the examples. After that, `fixtures/cases.csv` shows the compact path and `examples/extended_cases.csv` gives a wider look at the same rule.
+I want this repository to be useful as a quick reading exercise: fixtures first, implementation second, verifier last.
 
-## What It Does
+## Beacon Gfx Palette Mark Review Notes
 
-- Includes extended examples for render inputs, including `surge` and `degraded`.
-- Documents stable output tradeoffs in `docs/operations.md`.
-- Runs locally with a single verification command and no external credentials.
-- Stores project constants and verification metadata in `metadata/project.json`.
-- Adds a repository audit script that checks structure before running the language verifier.
+The first comparison I would make is `geometry span` against `shader drift` because it shows where the rule is most opinionated.
 
-## Purpose
+## Features
 
-The goal is to capture the core behavior in code and make the surrounding assumptions obvious. A reader should be able to run the verifier, open the fixtures, and understand why each decision was made.
+- `fixtures/domain_review.csv` adds cases for geometry span and atlas pressure.
+- `metadata/domain-review.json` records the same cases in structured form.
+- `config/review-profile.json` captures the read order and the two review questions.
+- `examples/beacon-gfx-palette-walkthrough.md` walks through the case spread.
+- The Dart code includes a review path for `geometry span` and `shader drift`.
+- `docs/field-notes.md` explains the strongest and weakest cases.
 
-## Files Worth Reading
+## Architecture Notes
 
-- `lib`: library code
-- `tests`: verification harness
-- `fixtures`: compact golden scenarios
-- `examples`: expanded scenario set
-- `metadata`: project constants and verification metadata
-- `docs`: operations and extension notes
-- `scripts`: local verification and audit commands
+The fixture data drives the tests. The code stays thin, while `metadata/domain-review.json` and `config/review-profile.json` explain what each case is meant to protect.
 
-## Design Sketch
-
-The project is organized around a compact model rather than a large framework. Inputs are scored, classified, and checked against golden fixtures. The constants live in code and are mirrored in metadata so documentation drift is easy to catch. The Dart project uses a small library and assertion script, avoiding package dependencies for verification.
+The Dart implementation avoids hidden state so fixture changes are easy to reason about.
 
 ## Usage
 
@@ -38,31 +31,10 @@ The project is organized around a compact model rather than a large framework. I
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1
 ```
 
-This runs the language-level build or test path against the compact fixture set.
+## Tests
 
-## Fixture Notes
+That command is also the regression path. It verifies the domain cases and catches mismatches between the CSV, metadata, and code.
 
-`surge` is the first example I would inspect because it lands on the `review` path with a score of 167. The broader file also keeps `degraded` at -99 and `surge` at 167, which gives the model a useful low-to-high spread.
+## Limitations And Roadmap
 
-## Verification
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/audit.ps1
-```
-
-The audit command checks repository structure and README constraints before it delegates to the verifier.
-
-## Limits
-
-The repository favors determinism over breadth. It does not pull live data, keep secrets, or depend on network access for verification.
-
-## Next Directions
-
-- Add malformed input fixtures so the failure path is as visible as the happy path.
-- Split the scoring constants into a typed configuration object and validate it before use.
-- Add a comparison mode that shows how decisions change when one signal is adjusted.
-- Add one more graphics fixture that focuses on a malformed or borderline input.
-
-## Setup
-
-The only required setup is the local Dart toolchain. After cloning, stay in the repo root so fixture paths resolve correctly.
+The repository is intentionally scoped to local checks. I would expand it by adding adversarial fixtures before adding features.

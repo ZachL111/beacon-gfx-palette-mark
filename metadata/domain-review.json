@@ -1,0 +1,73 @@
+{
+  "repo": "beacon-gfx-palette-mark",
+  "language": "Dart",
+  "category": "Graphics",
+  "goal": "Design a Dart verification harness for palette systems, covering security rule linting, safe and unsafe fixtures, and failure-oriented tests.",
+  "review_model": {
+    "terms": [
+      "geometry span",
+      "atlas pressure",
+      "shader drift",
+      "render budget"
+    ],
+    "lanes": [
+      "ship",
+      "watch",
+      "hold"
+    ],
+    "score": "signal * 2 + slack + confidence - drag * 3",
+    "purpose": "surface the domain-specific cases that need the most careful review"
+  },
+  "cases": [
+    {
+      "name": "baseline",
+      "focus": "geometry span",
+      "signal": 59,
+      "slack": 32,
+      "drag": 10,
+      "confidence": 54,
+      "score": 174,
+      "lane": "ship"
+    },
+    {
+      "name": "stress",
+      "focus": "atlas pressure",
+      "signal": 65,
+      "slack": 29,
+      "drag": 26,
+      "confidence": 84,
+      "score": 165,
+      "lane": "ship"
+    },
+    {
+      "name": "edge",
+      "focus": "shader drift",
+      "signal": 59,
+      "slack": 33,
+      "drag": 30,
+      "confidence": 92,
+      "score": 153,
+      "lane": "ship"
+    },
+    {
+      "name": "recovery",
+      "focus": "render budget",
+      "signal": 86,
+      "slack": 40,
+      "drag": 23,
+      "confidence": 69,
+      "score": 212,
+      "lane": "ship"
+    },
+    {
+      "name": "stale",
+      "focus": "geometry span",
+      "signal": 87,
+      "slack": 47,
+      "drag": 9,
+      "confidence": 76,
+      "score": 270,
+      "lane": "ship"
+    }
+  ]
+}
