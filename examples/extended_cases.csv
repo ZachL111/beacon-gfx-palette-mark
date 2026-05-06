@@ -1,0 +1,7 @@
+name,demand,capacity,latency,risk,weight,score,decision,reason
+baseline,66,86,18,13,9,95,review,graphics baseline scenario exercises the review path for bounded failure handling
+pressure,79,72,30,19,10,26,review,graphics pressure scenario exercises the review path for bounded failure handling
+surge,107,98,19,17,11,167,review,graphics surge scenario exercises the review path for bounded failure handling
+degraded,63,61,34,28,6,-99,review,graphics degraded scenario exercises the review path for bounded failure handling
+recovery,84,108,19,10,9,167,review,graphics recovery scenario exercises the review path for bounded failure handling
+boundary,72,85,20,14,7,86,review,graphics boundary scenario exercises the review path for bounded failure handling
